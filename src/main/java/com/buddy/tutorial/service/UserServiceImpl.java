@@ -6,8 +6,13 @@ import org.springframework.stereotype.Service;
 import com.buddy.tutorial.model.User;
 import com.buddy.tutorial.repository.UserRepository;
 
-public interface UserService {
+@Service
+public class UserServiceImpl implements UserService {
 	
-	public void createUser(User user);
+	@Autowired
+	UserRepository userRepository;
 	
+	public void createUser(User user) {
+		userRepository.save(user);
+	}
 }

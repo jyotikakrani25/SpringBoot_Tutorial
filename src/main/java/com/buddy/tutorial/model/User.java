@@ -10,7 +10,7 @@ import org.hibernate.annotations.Table;
 public class User {
 	
 	@Id
-	private int id ;
+	private Integer id ;
 	private String name ;
 	private String Email;
 	private String Status;

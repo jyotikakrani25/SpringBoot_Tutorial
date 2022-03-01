@@ -1,4 +1,4 @@
-package com.buddy.tutorial.config;
+/*package com.buddy.tutorial.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
@@ -17,4 +17,4 @@ public class EndpointsListener implements ApplicationListener<ContextRefreshedEv
         applicationContext.getBean(RequestMappingHandlerMapping.class).getHandlerMethods()
                 .forEach((e,v) -> log.info("endpoint => {} ", e.toString()));
     }
-}
+}*/
