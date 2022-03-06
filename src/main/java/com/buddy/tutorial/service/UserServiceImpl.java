@@ -8,11 +8,18 @@ import com.buddy.tutorial.repository.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
-	
-	@Autowired
-	UserRepository userRepository;
-	
-	public void createUser(User user) {
-		userRepository.save(user);
-	}
+    @Autowired
+    private UserRepository userRepository;
+/**
+** {@inheritDoc}
+*/
+    public void createUser(final User user) {
+    validateEmail();
+    userRepository.save(user);
+    }
+
+    private boolean validateEmail() {
+        // TODO: validate email not used again
+        return true;
+    }
 }
