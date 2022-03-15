@@ -6,6 +6,7 @@ public interface UserService {
 /**
  * method to create user.
  * @param user user object.
+ * @return
  */
-   void createUser(User user);
+   User createUser(User user);
 }

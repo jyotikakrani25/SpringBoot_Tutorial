@@ -9,21 +9,22 @@ import org.springframework.web.bind.annotation.RestController;
 import com.buddy.tutorial.model.User;
 import com.buddy.tutorial.service.UserService;
 
+import javax.validation.Valid;
+
 @RestController
 @AllArgsConstructor
-@NoArgsConstructor
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
 
     /**
      * This API will create users in database.
-     * @param user
+     * @param user is considering as a Request Body
      * @return user.
      */
     @PostMapping("/users")
-    public User createUser(@RequestBody final User user) {
-        userService.createUser(user);
-        return user;
+    public User createUser(@Valid @RequestBody final User user) {
+        User response = userService.createUser(user);
+        return response;
     }
 }

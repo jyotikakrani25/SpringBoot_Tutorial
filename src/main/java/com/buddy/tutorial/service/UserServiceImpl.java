@@ -10,15 +10,20 @@ import com.buddy.tutorial.repository.UserRepository;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
-/**
-** {@inheritDoc}
-*/
-    public void createUser(final User user) {
-    validateEmail();
-    userRepository.save(user);
+
+    /**
+     * * {@inheritDoc}
+     *
+     * @return
+     */
+    public User createUser(final User user) {
+        validateEmail(user);
+        return userRepository.save(user);
     }
 
-    private boolean validateEmail() {
+    private boolean validateEmail(User user) {
+
+        if (user.getEmail() == null) throw new RuntimeException("Email can't be null");
         // TODO: validate email not used again
         return true;
     }

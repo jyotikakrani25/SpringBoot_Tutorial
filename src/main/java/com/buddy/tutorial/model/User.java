@@ -5,7 +5,7 @@ import javax.persistence.Id;
 
 import lombok.Data;
 
-@Entity(name = "Users")
+@Entity(name = "users")
 @Data
 public class User {
 
