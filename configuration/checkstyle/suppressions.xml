@@ -11,5 +11,6 @@
     <suppress checks="HideUtilityClassConstructor"/>
     <suppress checks="NewlineAtEndOfFile"/>
     <suppress checks="LineLength"/>
+    <suppress checks="TodoComment"/>
 
 </suppressions>
