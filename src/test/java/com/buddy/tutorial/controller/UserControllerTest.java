@@ -40,7 +40,7 @@ class UserControllerTest {
         assertNotNull(response);
         assertEquals(101, response.getId());
         assertEquals("SSS", response.getName());
-        assertEquals("Engineer", response.getStatus());
+        assertEquals(UserStatus.ACTIVE, response.getStatus());
     }
 
 

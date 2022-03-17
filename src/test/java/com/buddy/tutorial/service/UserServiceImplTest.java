@@ -41,18 +41,21 @@ class UserServiceImplTest {
         assertNotNull(response);
         assertEquals(101, response.getId());
         assertEquals("SSS", response.getName());
-        assertEquals("Engineer", response.getStatus());
+        assertEquals(UserStatus.ACTIVE, response.getStatus());
     }
 
     @Test()
-    void createUser_NoEmail() {
+    void createUser_ExistingEmail() {
         //Given
         User user = new User();
         user.setId(101);
         user.setName("SSS");
+        user.setEmail("jo@gmail.com");
         user.setStatus(UserStatus.ACTIVE);
 
+
         //when
+        Mockito.when(userRepository.existsByEmailIgnoreCase(user.getEmail())).thenReturn(true);
         assertThrows(RuntimeException.class, () -> userService.createUser(user));
     }
 
