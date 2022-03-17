@@ -1,13 +1,11 @@
 package com.buddy.tutorial.controller;
 
+import com.buddy.tutorial.model.User;
+import com.buddy.tutorial.service.UserService;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.buddy.tutorial.model.User;
-import com.buddy.tutorial.service.UserService;
 
 import javax.validation.Valid;
 
@@ -24,7 +22,6 @@ public class UserController {
      */
     @PostMapping("/users")
     public User createUser(@Valid @RequestBody final User user) {
-        User response = userService.createUser(user);
-        return response;
+        return userService.createUser(user);
     }
 }

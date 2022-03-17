@@ -15,6 +15,6 @@ public class EndpointsListener implements ApplicationListener<ContextRefreshedEv
     public void onApplicationEvent(ContextRefreshedEvent event) {
         ApplicationContext applicationContext = event.getApplicationContext();
         applicationContext.getBean(RequestMappingHandlerMapping.class).getHandlerMethods()
-                .forEach((e,v) -> log.info("endpoint => {} ", e.toString()));
+                .forEach((e, v) -> log.info("endpoint => {} ", e.toString()));
     }
 }

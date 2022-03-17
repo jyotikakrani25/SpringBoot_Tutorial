@@ -1,10 +1,9 @@
 package com.buddy.tutorial.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.buddy.tutorial.model.User;
 import com.buddy.tutorial.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -21,10 +20,10 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-    private boolean validateEmail(User user) {
+    private void validateEmail(final User user) {
 
-        if (user.getEmail() == null) throw new RuntimeException("Email can't be null");
-        // TODO: validate email not used again
-        return true;
+        if (userRepository.existsByEmailIgnoreCase(user.getEmail())) {
+            throw new RuntimeException("Email already exist");
+        }
     }
 }
