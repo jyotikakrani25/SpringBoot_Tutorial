@@ -18,5 +18,5 @@ public class User {
     @Email
     @NotBlank
     private String email;
-    private String status;
+    private UserStatus status;
 }

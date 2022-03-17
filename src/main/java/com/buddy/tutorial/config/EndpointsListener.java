@@ -12,7 +12,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 public class EndpointsListener implements ApplicationListener<ContextRefreshedEvent> {
 
     @Override
-    public void onApplicationEvent(ContextRefreshedEvent event) {
+    public void onApplicationEvent(final ContextRefreshedEvent event) {
         ApplicationContext applicationContext = event.getApplicationContext();
         applicationContext.getBean(RequestMappingHandlerMapping.class).getHandlerMethods()
                 .forEach((e, v) -> log.info("endpoint => {} ", e.toString()));

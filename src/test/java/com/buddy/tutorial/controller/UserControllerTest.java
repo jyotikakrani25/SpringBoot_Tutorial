@@ -1,6 +1,7 @@
 package com.buddy.tutorial.controller;
 
 import com.buddy.tutorial.model.User;
+import com.buddy.tutorial.model.UserStatus;
 import com.buddy.tutorial.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,7 +28,7 @@ class UserControllerTest {
         user.setId(101);
         user.setName("SSS");
         user.setEmail("SSS@gmail.com");
-        user.setStatus("Engineer");
+        user.setStatus(UserStatus.ACTIVE);
 
         //When
         Mockito.when(userService.createUser(user)).thenReturn(user);

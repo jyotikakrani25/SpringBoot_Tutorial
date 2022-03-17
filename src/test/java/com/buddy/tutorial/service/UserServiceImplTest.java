@@ -1,6 +1,7 @@
 package com.buddy.tutorial.service;
 
 import com.buddy.tutorial.model.User;
+import com.buddy.tutorial.model.UserStatus;
 import com.buddy.tutorial.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,7 +29,7 @@ class UserServiceImplTest {
         user.setId(101);
         user.setName("SSS");
         user.setEmail("SSS@gmail.com");
-        user.setStatus("Engineer");
+        user.setStatus(UserStatus.ACTIVE);
 
 
         //when
@@ -49,7 +50,7 @@ class UserServiceImplTest {
         User user = new User();
         user.setId(101);
         user.setName("SSS");
-        user.setStatus("Engineer");
+        user.setStatus(UserStatus.ACTIVE);
 
         //when
         assertThrows(RuntimeException.class, () -> userService.createUser(user));
