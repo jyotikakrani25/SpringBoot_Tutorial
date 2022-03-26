@@ -38,9 +38,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public Page<User> getAllUsers(Pageable pageable, String query, UserStatus status) {
         if (query != null && status != null) {
-            return userRepository.findByNameAndStatus(query, status, pageable);
+            return userRepository.findByNameContainingIgnoreCaseOrEmailContainingIgnoreCaseAndStatus(query, query, status, pageable);
         } else if (query != null) {
-            return userRepository.findByNameContainingIgnoreCase(query, pageable);
+            return userRepository.findByNameContainingIgnoreCaseOrEmailContainingIgnoreCase(query, query, pageable);
         } else if (status != null) {
             return userRepository.findByStatus(status, pageable);
         } else {
