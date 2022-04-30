@@ -19,4 +19,12 @@ public class User {
     @NotBlank
     private String email;
     private UserStatus status;
+
+    public boolean isActive() {
+        return status != null && status == UserStatus.ACTIVE;
+    }
+
+    public boolean isDisabled() {
+        return status != null && status == UserStatus.DISABLED;
+    }
 }

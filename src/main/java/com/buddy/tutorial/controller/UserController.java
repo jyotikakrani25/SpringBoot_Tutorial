@@ -4,6 +4,7 @@ import com.buddy.tutorial.model.User;
 import com.buddy.tutorial.model.UserStatus;
 import com.buddy.tutorial.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import javax.validation.Valid;
 @AllArgsConstructor
 public class UserController {
 
+    @Autowired
     private final UserService userService;
 
     /**
@@ -36,6 +38,5 @@ public class UserController {
     public Page<User> getAllUsers(Pageable usersPageable, @RequestParam(required = false) String query, @RequestParam(required = false) UserStatus status) {
 
         return userService.getAllUsers(usersPageable, query, status);
-
     }
 }
