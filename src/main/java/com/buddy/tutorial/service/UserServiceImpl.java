@@ -31,16 +31,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(Integer userId) {
+    public User getUserById(final Integer userId) {
         return userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User Not Found"));
     }
 
     @Override
-    public Page<User> getAllUsers(Pageable pageable, String query, UserStatus status) {
+    public Page<User> getAllUsers(final Pageable pageable, final String query, final UserStatus status) {
         if (query != null && status != null) {
             return userRepository.findByNameContainingIgnoreCaseOrEmailContainingIgnoreCaseAndStatus(query, query, status, pageable);
-        } else if (query != null) {//select U* from users where name = %s and email = %s : select * from Users where name = buddy ,or email =
-            return userRepository.findByNameContainingIgnoreCaseOrEmailContainingIgnoreCase(query, query, pageable);// either name or email
+        } else if (query != null) { //select U* from users where name = %s and email = %s : select * from Users where name = buddy ,or email =
+            return userRepository.findByNameContainingIgnoreCaseOrEmailContainingIgnoreCase(query, query, pageable); // either name or email
         } else if (status != null) {
             return userRepository.findByStatus(status, pageable);
         } else {

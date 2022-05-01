@@ -38,7 +38,7 @@ class UserControllerIT {
     }
 
     @Test
-    public void createUser_Success() throws Exception {
+    void createUser_Success() throws Exception {
 
         //given
         String request = "{\n" +
@@ -63,7 +63,7 @@ class UserControllerIT {
     }
 
     @Test
-    public void createUser_NoName_Failure() throws Exception {
+    void createUser_NoName_Failure() throws Exception {
 
         String request = "{\n" +
                 "  \"id\": 102,\n" +
@@ -87,7 +87,7 @@ class UserControllerIT {
     }
 
     @Test
-    public void createUser_NoEmail_Failure() throws Exception {
+    void createUser_NoEmail_Failure() throws Exception {
 
         String request = "{\n" +
                 "  \"id\": 132,\n" +
@@ -111,7 +111,7 @@ class UserControllerIT {
     }
 
     @Test
-    public void createUser_InvalidEmail_Failure() throws Exception {
+    void createUser_InvalidEmail_Failure() throws Exception {
 
         String request = "{\n" +
                 "  \"id\": 132,\n" +
@@ -136,7 +136,7 @@ class UserControllerIT {
     }
 
     @Test
-    public void createUser_ExistingEmail_Failure() throws Exception {
+    void createUser_ExistingEmail_Failure() throws Exception {
 
         User user = new User();
         user.setId(131);
@@ -166,7 +166,7 @@ class UserControllerIT {
     }
 
     @Test
-    public void getUserById_Success() throws Exception {
+    void getUserById_Success() throws Exception {
 
         String userId = "101";
         ResultActions response = mockmvc.perform(get("/users/{userId}", 101))
@@ -183,7 +183,7 @@ class UserControllerIT {
     }
 
     @Test
-    public void getAllUsers_Success() throws Exception {
+    void getAllUsers_Success() throws Exception {
 
         String userId = "101";
         String request = "{\n" +

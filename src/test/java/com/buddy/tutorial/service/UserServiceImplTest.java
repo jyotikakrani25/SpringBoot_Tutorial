@@ -19,7 +19,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 
 @ExtendWith(MockitoExtension.class)
@@ -73,7 +77,7 @@ class UserServiceImplTest {
     }
 
     @Test
-    public void getUserByID_Success() {
+    void getUserByID_Success() {
         //Given
         User user = new User();
         user.setId(101);
@@ -99,13 +103,13 @@ class UserServiceImplTest {
     }
 
     @Test
-    public void getUserById_NoUserFound_ExceptionThrown() {
+    void getUserById_NoUserFound_ExceptionThrown() {
         assertThrows(RuntimeException.class, () -> userService.getUserById(555));
 
     }
 
     @Test
-    public void getAllUsers_WithStatus_Success() {
+    void getAllUsers_WithStatus_Success() {
 
         //String query = "Buddy";
         List<User> users = new ArrayList<>();
@@ -124,7 +128,7 @@ class UserServiceImplTest {
     }
 
     @Test
-    public void getAllUsers_WithNameOrEmail_Success() {
+    void getAllUsers_WithNameOrEmail_Success() {
 
         String name = "Buddy";
 
@@ -144,7 +148,7 @@ class UserServiceImplTest {
     }
 
     @Test
-    public void getAllUsers_WithNameOrEmailAndStatus_Success() {
+    void getAllUsers_WithNameOrEmailAndStatus_Success() {
 
         String name = "Buddy";
 
@@ -164,7 +168,7 @@ class UserServiceImplTest {
     }
 
     @Test
-    public void getAllUsers_findAllUsers_Success() {
+    void getAllUsers_findAllUsers_Success() {
 
         String name = "Buddy";
 
