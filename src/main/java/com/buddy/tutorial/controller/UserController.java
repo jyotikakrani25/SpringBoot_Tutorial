@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,6 +19,7 @@ import javax.validation.Valid;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
@@ -29,17 +31,17 @@ public class UserController {
      * @param user is considering as a Request Body
      * @return user.
      */
-    @PostMapping("/users")
+    @PostMapping
     public User createUser(@Valid @RequestBody final User user) {
         return userService.createUser(user);
     }
 
-    @GetMapping("/users/{userId}")
+    @GetMapping("{userId}")
     public User getUserByID(@PathVariable final Integer userId) {
         return userService.getUserById(userId);
     }
 
-    @GetMapping("/users")
+    @GetMapping
     public Page<User> getAllUsers(final Pageable usersPageable, @RequestParam(required = false) final String query, @RequestParam(required = false) final UserStatus status) {
 
         return userService.getAllUsers(usersPageable, query, status);
