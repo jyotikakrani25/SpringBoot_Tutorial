@@ -20,6 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
+//@WebMvcTest(UserController.class)
 @AutoConfigureMockMvc
 class UserControllerIT {
 
@@ -30,6 +31,7 @@ class UserControllerIT {
     private ObjectMapper mapper;
 
     @Autowired
+    //@MockBean
     private UserRepository repository;
 
     @BeforeEach

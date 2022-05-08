@@ -29,7 +29,7 @@ class UserControllerTest {
     private UserService userService;
 
     @Test
-    public void createUserAPITest() {
+    public void addUser_Success() {
         //Given
         User user = new User();
         user.setId(101);

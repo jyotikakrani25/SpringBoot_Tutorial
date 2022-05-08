@@ -4,7 +4,6 @@ import com.buddy.tutorial.model.User;
 import com.buddy.tutorial.model.UserStatus;
 import com.buddy.tutorial.service.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +21,6 @@ import javax.validation.Valid;
 @RequestMapping("/users")
 public class UserController {
 
-    @Autowired
     private final UserService userService;
 
     /**

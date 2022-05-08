@@ -3,7 +3,6 @@ package com.buddy.tutorial.service;
 import com.buddy.tutorial.model.User;
 import com.buddy.tutorial.model.UserStatus;
 import com.buddy.tutorial.repository.UserRepository;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -27,7 +26,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("UserServiceImplementation")
 class UserServiceImplTest {
 
     @Mock
@@ -38,7 +36,6 @@ class UserServiceImplTest {
 
 
     @Test
-    @DisplayName("UserSuccess")
     void createUser_Success() {
         //Given
         User user = new User();
@@ -93,13 +90,10 @@ class UserServiceImplTest {
         assertNotNull(response);
         assertEquals("SSS", response.getName());
 
-        assertTrue(response::isActive, this::getIDMismatchMessage);
-        assertFalse(response.isDisabled(), this::getIDMismatchMessage);
+        //when assertion fail, it will print the message
+        assertTrue(response::isActive, "User is not Active");
+        assertFalse(response.isDisabled(), "User is disabled");
 
-    }
-
-    public String getIDMismatchMessage() {
-        return "Id value is not matching";
     }
 
     @Test

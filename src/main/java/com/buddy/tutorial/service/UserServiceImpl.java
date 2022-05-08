@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     public Page<User> getAllUsers(final Pageable pageable, final String query, final UserStatus status) {
         if (query != null && status != null) {
             return userRepository.findByNameContainingIgnoreCaseOrEmailContainingIgnoreCaseAndStatus(query, query, status, pageable);
-        } else if (query != null) { //select U* from users where name = %s and email = %s : select * from Users where name = buddy ,or email =
+        } else if (query != null) {
             return userRepository.findByNameContainingIgnoreCaseOrEmailContainingIgnoreCase(query, query, pageable); // either name or email
         } else if (status != null) {
             return userRepository.findByStatus(status, pageable);

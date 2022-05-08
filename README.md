@@ -1,9 +1,14 @@
 # Spring Boot tutorial
 
 ## Introduction
-[TBD]
+This is the Spring Data JPA project ,which is basically for performing the CRUD operations
+on database by using Spring Data JPA Concepts.Alongwith CRUD operations, we will learn how
+to perform Unit and Integration test.
 
 ## Running the application
+
+The main file of this application is TutorialApplication.To run the file,right click on it
+and run
 
 ### Running Sonar locally
 
@@ -15,3 +20,5 @@ view results in https://sonarcloud.io/dashboard?id=jyotikakrani25_SpringBoot_Tut
 
 
 ## References
+
+Attached references link with each feature section,which you can find under Issues.
