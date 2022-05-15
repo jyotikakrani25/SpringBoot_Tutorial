@@ -12,5 +12,5 @@
     <suppress checks="NewlineAtEndOfFile"/>
     <suppress checks="LineLength"/>
     <suppress checks="TodoComment"/>
-
+    <suppress checks="MissingJavadocMethod"/>
 </suppressions>
