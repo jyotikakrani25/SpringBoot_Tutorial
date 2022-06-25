@@ -24,16 +24,24 @@ public class CurrencyServiceImpl implements CurrencyService {
     public List<CurrencyInfo> getCurrencyInfo() {
         CountryCurrencyResponse response = restTemplate.getForObject(url, CountryCurrencyResponse.class);
         log.debug("Response from countriesnow {}", response);
-        List<CountryCurrencyInfo> currencyInfoList = response.getData();
-        List<CurrencyInfo> currencyList = convertDTO(currencyInfoList);
-        return currencyList;
+        List<CountryCurrencyInfo> currencyInfoList = null;
+        if (response != null) {
+            currencyInfoList = response.getData();
+        }
+        if (currencyInfoList != null) {
+            return convertDTO(currencyInfoList);
+        }
+        throw new RuntimeException("no response");
     }
 
     @Override
     public CurrencyInfo getCurrencyData(String code) {
 
         CountryCurrencyResponse response = restTemplate.getForObject(url, CountryCurrencyResponse.class);
-        List<CountryCurrencyInfo> data = response.getData();
+        List<CountryCurrencyInfo> data = null;
+        if (response != null) {
+            data = response.getData();
+        }
         CountryCurrencyInfo countryCurrencyInfo = filter(data, code);
         return convertDTO(countryCurrencyInfo);
     }

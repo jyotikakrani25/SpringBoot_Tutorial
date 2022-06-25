@@ -29,7 +29,7 @@ public class CurrencyController {
     }
 
     @GetMapping("/currencycode")
-    public ResponseModel getCurrency(@RequestParam String code) {
+    public ResponseModel getCurrency(@RequestParam final String code) {
 
         ResponseModel model = new ResponseModel();
         CurrencyInfo countrydata = ccService.getCurrencyData(code);
@@ -39,6 +39,4 @@ public class CurrencyController {
 
         return model;
     }
-
-
 }
