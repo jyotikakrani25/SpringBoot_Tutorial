@@ -9,5 +9,5 @@ import java.util.List;
 public interface CurrencyService {
     List<CurrencyInfo> getCurrencyInfo();
 
-    CurrencyInfo getCurrencyData(final String code);
+    CurrencyInfo getCurrencyData(String code);
 }
