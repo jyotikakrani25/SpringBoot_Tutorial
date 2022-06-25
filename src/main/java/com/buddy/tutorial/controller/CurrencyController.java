@@ -16,7 +16,7 @@ import java.util.List;
 public class CurrencyController {
 
     @Autowired
-    public CurrencyService ccService;
+    private CurrencyService ccService;
 
     @GetMapping
     public ResponseModel getAllCurrency() {

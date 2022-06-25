@@ -35,7 +35,7 @@ public class CurrencyServiceImpl implements CurrencyService {
     }
 
     @Override
-    public CurrencyInfo getCurrencyData(String code) {
+    public CurrencyInfo getCurrencyData(final String code) {
 
         CountryCurrencyResponse response = restTemplate.getForObject(url, CountryCurrencyResponse.class);
         List<CountryCurrencyInfo> data = null;
@@ -46,7 +46,7 @@ public class CurrencyServiceImpl implements CurrencyService {
         return convertDTO(countryCurrencyInfo);
     }
 
-    private CurrencyInfo convertDTO(CountryCurrencyInfo countryCurrencyInfo) {
+    private CurrencyInfo convertDTO(final CountryCurrencyInfo countryCurrencyInfo) {
 
         CurrencyInfo output = new CurrencyInfo();
         log.info("Translating the country {}", countryCurrencyInfo.getName());
@@ -57,7 +57,7 @@ public class CurrencyServiceImpl implements CurrencyService {
         return output;
     }
 
-    private CountryCurrencyInfo filter(List<CountryCurrencyInfo> data, String code) {
+    private CountryCurrencyInfo filter(final List<CountryCurrencyInfo> data, final String code) {
 
         for (CountryCurrencyInfo countryCurrencyInfo : data) {
             if (countryCurrencyInfo.getCurrency().equalsIgnoreCase(code) || countryCurrencyInfo.getIso2().equalsIgnoreCase(code)) {
@@ -67,7 +67,7 @@ public class CurrencyServiceImpl implements CurrencyService {
         throw new RuntimeException("No record found");
     }
 
-    private List<CurrencyInfo> convertDTO(List<CountryCurrencyInfo> inputList) {
+    private List<CurrencyInfo> convertDTO(final List<CountryCurrencyInfo> inputList) {
         List<CurrencyInfo> outputList = new ArrayList<>();
         for (CountryCurrencyInfo input : inputList) {
             CurrencyInfo output = new CurrencyInfo();
