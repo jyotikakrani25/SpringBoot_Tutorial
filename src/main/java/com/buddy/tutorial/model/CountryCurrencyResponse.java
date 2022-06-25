@@ -7,7 +7,8 @@ import java.util.List;
 @Data
 public class CountryCurrencyResponse {
 
-    private final String error;
-    private final String msg;
-    private final List<CountryCurrencyInfo> data;
+    private String error;
+    private String msg;
+    private List<CountryCurrencyInfo> data;
+
 }

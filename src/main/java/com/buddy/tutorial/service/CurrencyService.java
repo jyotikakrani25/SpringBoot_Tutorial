@@ -8,4 +8,6 @@ import java.util.List;
 @Service
 public interface CurrencyService {
     List<CurrencyInfo> getCurrencyInfo();
+
+    CurrencyInfo getCurrencyData(String code);
 }
