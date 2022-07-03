@@ -17,13 +17,14 @@ public class CurrencyController {
 
     @Autowired
     private CurrencyService ccService;
+    private static final Integer STATUS_CODE_OK = 200;
 
     @GetMapping
     public ResponseModel getAllCurrency() {
 
         ResponseModel responseModel = new ResponseModel();
         List<CurrencyInfo> currencyInfoList = ccService.getCurrencyInfo();
-        responseModel.setStatus(200);
+        responseModel.setStatus(STATUS_CODE_OK);
         responseModel.setData(currencyInfoList);
         return responseModel;
     }
@@ -32,7 +33,7 @@ public class CurrencyController {
     public ResponseModel getCurrency(@PathVariable final String code) {
         CurrencyInfo countrydata = ccService.getCurrencyData(code);
         ResponseModel model = new ResponseModel();
-        model.setStatus(200);
+        model.setStatus(STATUS_CODE_OK);
         model.setData(countrydata);
 
         return model;

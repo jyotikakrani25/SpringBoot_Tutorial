@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class ResponseModel {
 
-    private int status;
+    private Integer status;
     private Object data;
 }
