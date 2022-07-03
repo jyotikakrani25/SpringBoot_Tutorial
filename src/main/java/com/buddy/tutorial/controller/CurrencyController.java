@@ -5,14 +5,14 @@ import com.buddy.tutorial.model.ResponseModel;
 import com.buddy.tutorial.service.CurrencyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/currency")
+@RequestMapping("/countries")
 public class CurrencyController {
 
     @Autowired
@@ -23,18 +23,16 @@ public class CurrencyController {
 
         ResponseModel responseModel = new ResponseModel();
         List<CurrencyInfo> currencyInfoList = ccService.getCurrencyInfo();
-        responseModel.setStatus("200");
+        responseModel.setStatus(200);
         responseModel.setData(currencyInfoList);
         return responseModel;
     }
 
-    @GetMapping("/currencycode")
-    public ResponseModel getCurrency(@RequestParam final String code) {
-
-        ResponseModel model = new ResponseModel();
+    @GetMapping("/{code}")
+    public ResponseModel getCurrency(@PathVariable final String code) {
         CurrencyInfo countrydata = ccService.getCurrencyData(code);
-
-        model.setStatus("200");
+        ResponseModel model = new ResponseModel();
+        model.setStatus(200);
         model.setData(countrydata);
 
         return model;

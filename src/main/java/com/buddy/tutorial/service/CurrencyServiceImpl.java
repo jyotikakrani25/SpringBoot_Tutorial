@@ -4,6 +4,7 @@ import com.buddy.tutorial.model.CountryCurrencyInfo;
 import com.buddy.tutorial.model.CountryCurrencyResponse;
 import com.buddy.tutorial.model.CurrencyInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -15,8 +16,8 @@ import java.util.List;
 @Slf4j
 public class CurrencyServiceImpl implements CurrencyService {
 
-
-    private final RestTemplate restTemplate = new RestTemplate();
+    @Autowired
+    private RestTemplate restTemplate;
     @Value("${countriesnow.currency.url}")
     private String url;
 
@@ -24,14 +25,8 @@ public class CurrencyServiceImpl implements CurrencyService {
     public List<CurrencyInfo> getCurrencyInfo() {
         CountryCurrencyResponse response = restTemplate.getForObject(url, CountryCurrencyResponse.class);
         log.debug("Response from countriesnow {}", response);
-        List<CountryCurrencyInfo> currencyInfoList = null;
-        if (response != null) {
-            currencyInfoList = response.getData();
-        }
-        if (currencyInfoList != null) {
-            return convertDTO(currencyInfoList);
-        }
-        throw new RuntimeException("no response");
+        List<CountryCurrencyInfo> currencyInfoList = response.getData();
+        return convertDTO(currencyInfoList);
     }
 
     @Override
