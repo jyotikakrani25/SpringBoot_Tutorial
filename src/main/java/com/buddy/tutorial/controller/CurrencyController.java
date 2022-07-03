@@ -15,9 +15,9 @@ import java.util.List;
 @RequestMapping("/countries")
 public class CurrencyController {
 
+    private static final Integer STATUS_CODE_OK = 200;
     @Autowired
     private CurrencyService ccService;
-    private static final Integer STATUS_CODE_OK = 200;
 
     @GetMapping
     public ResponseModel getAllCurrency() {
