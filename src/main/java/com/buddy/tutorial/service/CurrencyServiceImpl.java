@@ -64,26 +64,21 @@ public class CurrencyServiceImpl implements CurrencyService {
         return output;
     }
 
+    private List<CurrencyInfo> convertDTO(final List<CountryCurrencyInfo> inputList) {
+        List<CurrencyInfo> outputList = new ArrayList<>();
+        for (CountryCurrencyInfo input : inputList) {
+            outputList.add(convertDTO(input));
+        }
+        return outputList;
+    }
+
     private CountryCurrencyInfo filter(final List<CountryCurrencyInfo> data, final String code) {
 
         for (CountryCurrencyInfo countryCurrencyInfo : data) {
-            if (countryCurrencyInfo.getCurrency().equalsIgnoreCase(code) || countryCurrencyInfo.getIso2().equalsIgnoreCase(code)) {
+            if (code.equalsIgnoreCase(countryCurrencyInfo.getCurrency()) || code.equalsIgnoreCase(countryCurrencyInfo.getIso2())) {
                 return countryCurrencyInfo;
             }
         }
         throw new RuntimeException("No record found");
-    }
-
-    private List<CurrencyInfo> convertDTO(final List<CountryCurrencyInfo> inputList) {
-        List<CurrencyInfo> outputList = new ArrayList<>();
-        for (CountryCurrencyInfo input : inputList) {
-            CurrencyInfo output = new CurrencyInfo();
-            log.info("Translating the country {}", input.getName());
-            output.setCurrency(input.getCurrency());
-            output.setCountry(input.getName());
-            output.setCode(input.getIso2());
-            outputList.add(output);
-        }
-        return outputList;
     }
 }

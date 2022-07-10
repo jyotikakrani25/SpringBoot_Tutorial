@@ -32,10 +32,7 @@ class CurrencyControllerTest {
     @Test
     void getAllCurrency_Success() {
 
-        CurrencyInfo currencyInfo = new CurrencyInfo();
-        currencyInfo.setCurrency("INR");
-        currencyInfo.setCountry("India");
-        currencyInfo.setCode("IN");
+        CurrencyInfo currencyInfo = getCurrencyInfo();
 
         List<CurrencyInfo> currencyInfoList = new ArrayList<>();
         currencyInfoList.add(currencyInfo);
@@ -52,18 +49,21 @@ class CurrencyControllerTest {
     @Test
     void getCurrency_Success() {
 
-        CurrencyInfo currencyInfo = new CurrencyInfo();
-        currencyInfo.setCurrency("INR");
-        currencyInfo.setCountry("India");
-        currencyInfo.setCode("IN");
-
+        CurrencyInfo currencyInfo = getCurrencyInfo();
         Mockito.when(currencyService.getCurrencyData("IN")).thenReturn(currencyInfo);
 
         ResponseModel response = controller.getCurrency("IN");
 
-
         assertNotNull(response);
         assertEquals(response.getData(), currencyInfo);
+    }
+
+    private CurrencyInfo getCurrencyInfo() {
+        CurrencyInfo currencyInfo = new CurrencyInfo();
+        currencyInfo.setCurrency("INR");
+        currencyInfo.setCountry("India");
+        currencyInfo.setCode("IN");
+        return currencyInfo;
     }
 
 }

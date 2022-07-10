@@ -36,24 +36,7 @@ class CurrencyServiceImplTest {
 
     @Test
     void getCurrencyInfo_Success() {
-
-        CountryCurrencyInfo countryCurrencyInfo = new CountryCurrencyInfo();
-        countryCurrencyInfo.setCurrency("INR");
-        countryCurrencyInfo.setName("India");
-        countryCurrencyInfo.setIso2("IN");
-        countryCurrencyInfo.setIso3("IN");
-
-        List<CountryCurrencyInfo> data = new ArrayList<>();
-        data.add(countryCurrencyInfo);
-
-        CountryCurrencyResponse response = new CountryCurrencyResponse();
-        response.setData(data);
-
-        CurrencyInfo currencyInfo = new CurrencyInfo();
-        currencyInfo.setCurrency("INR");
-        currencyInfo.setCode("IN");
-        currencyInfo.setCountry("India");
-
+        CountryCurrencyResponse response = getCountryCurrencyResponse();
 
         Mockito.when(restTemplate.getForObject(url, CountryCurrencyResponse.class)).thenReturn(response);
         List<CurrencyInfo> result = currencyService.getCurrencyInfo();
@@ -64,18 +47,7 @@ class CurrencyServiceImplTest {
     @Test
     void getCurrencyData_whenPassingIsoCode_Success() {
 
-        CountryCurrencyInfo countryCurrencyInfo = new CountryCurrencyInfo();
-        countryCurrencyInfo.setCurrency("INR");
-        countryCurrencyInfo.setName("India");
-        countryCurrencyInfo.setIso3("IN");
-        countryCurrencyInfo.setIso2("IN");
-
-
-        List<CountryCurrencyInfo> data = new ArrayList<>();
-        data.add(countryCurrencyInfo);
-
-        CountryCurrencyResponse response = new CountryCurrencyResponse();
-        response.setData(data);
+        CountryCurrencyResponse response = getCountryCurrencyResponse();
 
         Mockito.when(restTemplate.getForObject(url, CountryCurrencyResponse.class)).thenReturn(response);
 
@@ -88,22 +60,12 @@ class CurrencyServiceImplTest {
     @Test
     void getCurrencyData_whenPassingCurrencyCode_Success() {
 
-        CountryCurrencyInfo countryCurrencyInfo = new CountryCurrencyInfo();
-        countryCurrencyInfo.setCurrency("INR");
-        countryCurrencyInfo.setName("India");
-        countryCurrencyInfo.setIso3("IN");
-        countryCurrencyInfo.setIso2("IN");
-
-
-        List<CountryCurrencyInfo> data = new ArrayList<>();
-        data.add(countryCurrencyInfo);
-
-        CountryCurrencyResponse response = new CountryCurrencyResponse();
-        response.setData(data);
+        CountryCurrencyResponse response = getCountryCurrencyResponse();
 
         Mockito.when(restTemplate.getForObject(url, CountryCurrencyResponse.class)).thenReturn(response);
 
         CurrencyInfo result = currencyService.getCurrencyData("INR");
+
 
         assertNotNull(result);
 
@@ -133,18 +95,7 @@ class CurrencyServiceImplTest {
     @Test
     void getCurrencyData_whenInvalidCodePassed_Failure() {
 
-        CountryCurrencyInfo countryCurrencyInfo = new CountryCurrencyInfo();
-        countryCurrencyInfo.setCurrency("INR");
-        countryCurrencyInfo.setName("India");
-        countryCurrencyInfo.setIso3("IN");
-        countryCurrencyInfo.setIso2("IN");
-
-
-        List<CountryCurrencyInfo> data = new ArrayList<>();
-        data.add(countryCurrencyInfo);
-
-        CountryCurrencyResponse response = new CountryCurrencyResponse();
-        response.setData(data);
+        CountryCurrencyResponse response = getCountryCurrencyResponse();
 
         Mockito.when(restTemplate.getForObject(url, CountryCurrencyResponse.class)).thenReturn(response);
 
@@ -172,6 +123,22 @@ class CurrencyServiceImplTest {
         RuntimeException exception = assertThrows(RuntimeException.class, () -> currencyService.getCurrencyInfo());
 
         assertEquals("There is some error at Countries Now API.We can't proceed", exception.getMessage());
+    }
+
+    private CountryCurrencyResponse getCountryCurrencyResponse() {
+        CountryCurrencyInfo countryCurrencyInfo = new CountryCurrencyInfo();
+        countryCurrencyInfo.setCurrency("INR");
+        countryCurrencyInfo.setName("India");
+        countryCurrencyInfo.setIso3("IN");
+        countryCurrencyInfo.setIso2("IN");
+
+
+        List<CountryCurrencyInfo> data = new ArrayList<>();
+        data.add(countryCurrencyInfo);
+
+        CountryCurrencyResponse response = new CountryCurrencyResponse();
+        response.setData(data);
+        return response;
     }
 
 }
