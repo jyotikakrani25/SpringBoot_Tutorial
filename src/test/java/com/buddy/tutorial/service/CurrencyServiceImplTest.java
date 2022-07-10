@@ -16,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -61,7 +62,7 @@ class CurrencyServiceImplTest {
     }
 
     @Test
-    void getCurrencyData_Success() {
+    void getCurrencyData_whenPassingIsoCode_Success() {
 
         CountryCurrencyInfo countryCurrencyInfo = new CountryCurrencyInfo();
         countryCurrencyInfo.setCurrency("INR");
@@ -85,10 +86,92 @@ class CurrencyServiceImplTest {
     }
 
     @Test
-    void getCurrencyData_Failure() {
+    void getCurrencyData_whenPassingCurrencyCode_Success() {
 
-        assertThrows(RuntimeException.class, () -> currencyService.getCurrencyData("XYZ"), "No record found");
+        CountryCurrencyInfo countryCurrencyInfo = new CountryCurrencyInfo();
+        countryCurrencyInfo.setCurrency("INR");
+        countryCurrencyInfo.setName("India");
+        countryCurrencyInfo.setIso3("IN");
+        countryCurrencyInfo.setIso2("IN");
 
+
+        List<CountryCurrencyInfo> data = new ArrayList<>();
+        data.add(countryCurrencyInfo);
+
+        CountryCurrencyResponse response = new CountryCurrencyResponse();
+        response.setData(data);
+
+        Mockito.when(restTemplate.getForObject(url, CountryCurrencyResponse.class)).thenReturn(response);
+
+        CurrencyInfo result = currencyService.getCurrencyData("INR");
+
+        assertNotNull(result);
+
+    }
+
+    @Test
+    void getCurrencyData_whenResponseIsNull_Failure() {
+
+        Mockito.when(restTemplate.getForObject(url, CountryCurrencyResponse.class)).thenReturn(null);
+
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> currencyService.getCurrencyData("INR"));
+
+        assertEquals("No Response from Countriesnow API", exception.getMessage());
+    }
+
+    @Test
+    void getCurrencyData_whenResponse_hasError_Failure() {
+
+        CountryCurrencyResponse response = new CountryCurrencyResponse();
+        response.setError(true);
+        Mockito.when(restTemplate.getForObject(url, CountryCurrencyResponse.class)).thenReturn(response);
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> currencyService.getCurrencyData("IN"));
+
+        assertEquals("There is some error at Countries Now API.We can't proceed", exception.getMessage());
+    }
+
+    @Test
+    void getCurrencyData_whenInvalidCodePassed_Failure() {
+
+        CountryCurrencyInfo countryCurrencyInfo = new CountryCurrencyInfo();
+        countryCurrencyInfo.setCurrency("INR");
+        countryCurrencyInfo.setName("India");
+        countryCurrencyInfo.setIso3("IN");
+        countryCurrencyInfo.setIso2("IN");
+
+
+        List<CountryCurrencyInfo> data = new ArrayList<>();
+        data.add(countryCurrencyInfo);
+
+        CountryCurrencyResponse response = new CountryCurrencyResponse();
+        response.setData(data);
+
+        Mockito.when(restTemplate.getForObject(url, CountryCurrencyResponse.class)).thenReturn(response);
+
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> currencyService.getCurrencyData("XYZ"));
+
+        assertEquals("No record found", exception.getMessage());
+    }
+
+    @Test
+    void getCurrencyInfo_whenResponseIsNull_Failure() {
+
+        Mockito.when(restTemplate.getForObject(url, CountryCurrencyResponse.class)).thenReturn(null);
+
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> currencyService.getCurrencyInfo());
+
+        assertEquals("No Response from Countriesnow API", exception.getMessage());
+    }
+
+    @Test
+    void getCurrencyInfo_whenResponse_hasError_Failure() {
+
+        CountryCurrencyResponse response = new CountryCurrencyResponse();
+        response.setError(true);
+        Mockito.when(restTemplate.getForObject(url, CountryCurrencyResponse.class)).thenReturn(response);
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> currencyService.getCurrencyInfo());
+
+        assertEquals("There is some error at Countries Now API.We can't proceed", exception.getMessage());
     }
 
 }

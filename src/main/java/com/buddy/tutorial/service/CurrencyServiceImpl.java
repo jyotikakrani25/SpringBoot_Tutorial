@@ -24,11 +24,15 @@ public class CurrencyServiceImpl implements CurrencyService {
     @Override
     public List<CurrencyInfo> getCurrencyInfo() {
         CountryCurrencyResponse response = restTemplate.getForObject(url, CountryCurrencyResponse.class);
-        log.debug("Response from countriesnow {}", response);
-        List<CountryCurrencyInfo> currencyInfoList = null;
-        if (response != null) {
-            currencyInfoList = response.getData();
+        if (null == response) {
+            throw new RuntimeException("No Response from Countriesnow API");
         }
+        log.debug("Response from countriesnow {}", response);
+
+        if (response.isError()) {
+            throw new RuntimeException("There is some error at Countries Now API.We can't proceed");
+        }
+        List<CountryCurrencyInfo> currencyInfoList = response.getData();
         return convertDTO(currencyInfoList);
     }
 
@@ -36,13 +40,18 @@ public class CurrencyServiceImpl implements CurrencyService {
     public CurrencyInfo getCurrencyData(final String code) {
 
         CountryCurrencyResponse response = restTemplate.getForObject(url, CountryCurrencyResponse.class);
-        List<CountryCurrencyInfo> data = null;
-        if (response != null) {
-            data = response.getData();
+        if (null == response) {
+            throw new RuntimeException("No Response from Countriesnow API");
         }
+
+        if (response.isError()) {
+            throw new RuntimeException("There is some error at Countries Now API.We can't proceed");
+        }
+        List<CountryCurrencyInfo> data = response.getData();
         CountryCurrencyInfo countryCurrencyInfo = filter(data, code);
         return convertDTO(countryCurrencyInfo);
     }
+
 
     private CurrencyInfo convertDTO(final CountryCurrencyInfo countryCurrencyInfo) {
 
