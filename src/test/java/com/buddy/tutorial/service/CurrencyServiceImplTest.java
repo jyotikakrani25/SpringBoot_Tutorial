@@ -34,7 +34,7 @@ class CurrencyServiceImplTest {
     }
 
     @Test
-    public void getCurrencyInfo_Success() {
+    void getCurrencyInfo_Success() {
 
         CountryCurrencyInfo countryCurrencyInfo = new CountryCurrencyInfo();
         countryCurrencyInfo.setCurrency("INR");
@@ -61,7 +61,7 @@ class CurrencyServiceImplTest {
     }
 
     @Test
-    public void getCurrencyData_Success() {
+    void getCurrencyData_Success() {
 
         CountryCurrencyInfo countryCurrencyInfo = new CountryCurrencyInfo();
         countryCurrencyInfo.setCurrency("INR");
@@ -85,7 +85,7 @@ class CurrencyServiceImplTest {
     }
 
     @Test
-    public void getCurrencyData_Failure() {
+    void getCurrencyData_Failure() {
 
         assertThrows(RuntimeException.class, () -> currencyService.getCurrencyData("XYZ"), "No record found");
 
