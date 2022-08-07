@@ -66,7 +66,7 @@ class NewsApiServiceImplTest {
                 NewsAPIResponse.class,
                 language, CategoryEnum.BUSINESS)).thenReturn(reponseEntity);
 
-        newsApiService.getTopheadlinesDetails(language, CategoryEnum.BUSINESS);
+        newsApiService.getTopHeadlinesDetails(language, CategoryEnum.BUSINESS);
         assertThat(reponseEntity).isNotNull();
     }
 
@@ -91,7 +91,7 @@ class NewsApiServiceImplTest {
                 NewsAPIResponse.class,
                 language, CategoryEnum.BUSINESS)).thenReturn(reponseEntity);
 
-        newsApiService.getTopheadlinesDetails(language, CategoryEnum.BUSINESS);
+        newsApiService.getTopHeadlinesDetails(language, CategoryEnum.BUSINESS);
         assertThat(reponseEntity).isNotNull();
     }
 

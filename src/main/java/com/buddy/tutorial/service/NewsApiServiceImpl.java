@@ -31,7 +31,7 @@ public class NewsApiServiceImpl implements NewsApiService {
     private String keyValue;
 
     @Override
-    public TopHeadlinesAPIResponse getTopheadlinesDetails(final String language, final CategoryEnum category) {
+    public TopHeadlinesAPIResponse getTopHeadlinesDetails(final String language, final CategoryEnum category) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("X-Api-Key", keyValue);
@@ -45,17 +45,18 @@ public class NewsApiServiceImpl implements NewsApiService {
                 category
         );
 
-        if (response.getBody() == null) {
+        NewsAPIResponse newsAPIResponse = response.getBody();
+        if (newsAPIResponse == null) {
             throw new RuntimeException("No data found from News API");
         }
 
-        List<ArticlesDetails> articlesDetails = response.getBody().getArticles();
+        List<ArticlesDetails> articlesDetails = newsAPIResponse.getArticles();
 
         List<TopHeadlinesDetail> topHeadlinesDetailList = convertDTO(articlesDetails);
 
         TopHeadlinesAPIResponse headlinesAPIResponse = new TopHeadlinesAPIResponse();
         headlinesAPIResponse.setNews(topHeadlinesDetailList);
-        headlinesAPIResponse.setRecords(response.getBody().getTotalResults());
+        headlinesAPIResponse.setRecords(newsAPIResponse.getTotalResults());
 
         return headlinesAPIResponse;
 

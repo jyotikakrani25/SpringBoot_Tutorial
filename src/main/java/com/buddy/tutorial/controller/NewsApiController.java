@@ -20,7 +20,7 @@ public class NewsApiController {
     @GetMapping("/news/top-headlines")
     public ResponseModel getTopHeadlines(@RequestParam(defaultValue = "en") @Schema(defaultValue = "en", allowableValues = {"en", "ar"}) final String language, @RequestParam(required = false) final CategoryEnum category) {
 
-        TopHeadlinesAPIResponse topheadlinesdetails = newsApiService.getTopheadlinesDetails(language, category);
+        TopHeadlinesAPIResponse topheadlinesdetails = newsApiService.getTopHeadlinesDetails(language, category);
         ResponseModel model = new ResponseModel();
         model.setStatus(StatusCode.STATUS_CODE_OK);
         model.setData(topheadlinesdetails);

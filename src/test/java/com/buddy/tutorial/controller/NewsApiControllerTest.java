@@ -37,7 +37,7 @@ class NewsApiControllerTest {
         String language = "ar";
         TopHeadlinesAPIResponse apiresponse = getTopHeadlinesResponse();
 
-        Mockito.when(newsApiService.getTopheadlinesDetails(language, CategoryEnum.BUSINESS)).thenReturn(apiresponse);
+        Mockito.when(newsApiService.getTopHeadlinesDetails(language, CategoryEnum.BUSINESS)).thenReturn(apiresponse);
 
         ResponseModel response = controller.getTopHeadlines(language, CategoryEnum.BUSINESS);
 
