@@ -64,9 +64,9 @@ class NewsApiServiceImplTest {
                 HttpMethod.GET,
                 request,
                 NewsAPIResponse.class,
-                language, CategoryEnum.business)).thenReturn(reponseEntity);
+                language, CategoryEnum.BUSINESS)).thenReturn(reponseEntity);
 
-        newsApiService.getTopheadlinesDetails(language, CategoryEnum.business);
+        newsApiService.getTopheadlinesDetails(language, CategoryEnum.BUSINESS);
         assertThat(reponseEntity).isNotNull();
     }
 
@@ -89,9 +89,9 @@ class NewsApiServiceImplTest {
                 HttpMethod.GET,
                 request,
                 NewsAPIResponse.class,
-                language, CategoryEnum.business)).thenReturn(reponseEntity);
+                language, CategoryEnum.BUSINESS)).thenReturn(reponseEntity);
 
-        newsApiService.getTopheadlinesDetails(language, CategoryEnum.business);
+        newsApiService.getTopheadlinesDetails(language, CategoryEnum.BUSINESS);
         assertThat(reponseEntity).isNotNull();
     }
 
