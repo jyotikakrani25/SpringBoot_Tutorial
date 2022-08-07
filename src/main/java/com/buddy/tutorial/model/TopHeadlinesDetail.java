@@ -2,6 +2,8 @@ package com.buddy.tutorial.model;
 
 import lombok.Data;
 
+import java.time.LocalDate;
+
 @Data
 public class TopHeadlinesDetail {
 
@@ -11,5 +13,5 @@ public class TopHeadlinesDetail {
     private String title;
     private String description;
     private String link;
-    private String publishedAt;
+    private LocalDate publishedAt;
 }

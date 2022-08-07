@@ -1,7 +1,9 @@
 package com.buddy.tutorial.service;
 
 import com.buddy.tutorial.model.ArticlesDetails;
+import com.buddy.tutorial.model.CategoryEnum;
 import com.buddy.tutorial.model.NewsAPIResponse;
+import com.buddy.tutorial.model.TopHeadlinesAPIResponse;
 import com.buddy.tutorial.model.TopHeadlinesDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,12 +29,12 @@ public class NewsApiServiceImpl implements NewsApiService {
     private String keyValue;
 
     @Override
-    public List<TopHeadlinesDetail> getNews(String language, String category) {
+    public TopHeadlinesAPIResponse getTopheadlinesDetails(final String language, final CategoryEnum category) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("X-Api-Key", keyValue);
-
         HttpEntity<Object> request = new HttpEntity<>(headers);
+
         ResponseEntity<NewsAPIResponse> response = restTemplate.exchange(newsAPIUrl,
                 HttpMethod.GET,
                 request,
@@ -41,14 +43,23 @@ public class NewsApiServiceImpl implements NewsApiService {
                 category
         );
 
-        List<ArticlesDetails> articlesDetails = response.getBody().getArticles();
-        response.getBody().getTotalResults();
+        if (response == null || response.getBody() == null) {
+            throw new RuntimeException("No data found from News API");
+        }
 
-        return convertDTO(articlesDetails);
+        List<ArticlesDetails> articlesDetails = response.getBody().getArticles();
+
+        List<TopHeadlinesDetail> topHeadlinesDetailList = convertDTO(articlesDetails);
+
+        TopHeadlinesAPIResponse headlinesAPIResponse = new TopHeadlinesAPIResponse();
+        headlinesAPIResponse.setNews(topHeadlinesDetailList);
+        headlinesAPIResponse.setRecords(response.getBody().getTotalResults());
+
+        return headlinesAPIResponse;
 
     }
 
-    private List<TopHeadlinesDetail> convertDTO(List<ArticlesDetails> articlesDetails) {
+    private List<TopHeadlinesDetail> convertDTO(final List<ArticlesDetails> articlesDetails) {
         List<TopHeadlinesDetail> headlinesList = new ArrayList<>();
 
 
@@ -60,7 +71,8 @@ public class NewsApiServiceImpl implements NewsApiService {
             headlines.setDescription(articlesDetail.getDescription());
             headlines.setTitle(articlesDetail.getTitle());
             headlines.setLink(articlesDetail.getUrl());
-            headlines.setPublishedAt(articlesDetail.getPublishedAt().substring(0, 10));
+            //headlines.setPublishedAt(LocalDate.of(articlesDetail.getPublishedAt()));
+            //headlines.setPublishedAt(articlesDetail.getPublishedAt().substring(0, 10));
             headlinesList.add(headlines);
         }
         return headlinesList;

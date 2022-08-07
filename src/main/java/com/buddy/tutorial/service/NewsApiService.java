@@ -1,10 +1,9 @@
 package com.buddy.tutorial.service;
 
-import com.buddy.tutorial.model.TopHeadlinesDetail;
-
-import java.util.List;
+import com.buddy.tutorial.model.CategoryEnum;
+import com.buddy.tutorial.model.TopHeadlinesAPIResponse;
 
 public interface NewsApiService {
 
-    List<TopHeadlinesDetail> getNews(String language, String category);
+    TopHeadlinesAPIResponse getTopheadlinesDetails(String language, CategoryEnum category);
 }
