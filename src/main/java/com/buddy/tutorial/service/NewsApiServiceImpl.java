@@ -14,7 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -43,7 +45,7 @@ public class NewsApiServiceImpl implements NewsApiService {
                 category
         );
 
-        if (response == null || response.getBody() == null) {
+        if (response.getBody() == null) {
             throw new RuntimeException("No data found from News API");
         }
 
@@ -71,10 +73,15 @@ public class NewsApiServiceImpl implements NewsApiService {
             headlines.setDescription(articlesDetail.getDescription());
             headlines.setTitle(articlesDetail.getTitle());
             headlines.setLink(articlesDetail.getUrl());
-            //headlines.setPublishedAt(LocalDate.of(articlesDetail.getPublishedAt()));
-            //headlines.setPublishedAt(articlesDetail.getPublishedAt().substring(0, 10));
+            headlines.setPublishedAt(formatDate(articlesDetail.getPublishedAt()));
             headlinesList.add(headlines);
         }
         return headlinesList;
+    }
+
+    private String formatDate(final Date date) {
+
+        SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateformat.format(date);
     }
 }
